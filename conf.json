@@ -1,0 +1,9 @@
+{
+  "host":"localhost",
+  "port":"6001",
+  "allApi":"/admin/model/all",
+  "register":"/admin/mod/register",
+  "xmlNode":"/admin/model/xml",
+  "checkname":"/admin/mod/checkname",
+  "allMod":"/admin/mod/all"
+}
