@@ -26,13 +26,13 @@ Yeoman travels light. He didn't pack any generators when he moved in. You can th
 To install generator-rbpmod from npm, run:
 
 ```bash
-npm install -g generator-rbpmod
+npm install -g generator-oxmod
 ```
 
 Finally, initiate the generator:
 
 ```bash
-yo rbpmod
+yo oxmod
 ```
 
 ### Getting To Know Yeoman
