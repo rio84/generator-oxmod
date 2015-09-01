@@ -35,9 +35,9 @@
   },
   "devApi":{
 
-    "host":"100.69.164.203",
-    "allApi":"/admin/api/getalltags",
-    "register":"/admin/mod/register"
+    "host":"121.41.24.28",
+    "allApi":"/o/apiall",
+    "register":"/o/modregister"
 
   }
 }

@@ -117,7 +117,7 @@ module.exports = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
     this.log(yosay(
-      'Welcome to ' + chalk.red('Rbp') + ' generator!'
+      'Welcome to ' + chalk.red('OXMod') + ' generator!'
     ));
     console.log(
       'Getting data from remote ...'
@@ -135,12 +135,12 @@ module.exports = yeoman.generators.Base.extend({
         deps:this.deps.join(',')
       },(function(r){
        // console.log('xmlNodes:',r)
-        if(r.code==0){
+        if(r.code==0||r.xmltpl||r.xml){
 
           this.log(chalk.green(
             '模块 '+this.modName+' 注册成功!  开始生成脚手架文件...'
           ));
-          this.xmlNodes= r.xmltpl;
+          this.xmlNodes= r.xmltpl||r.xml;
           var files='demo.xsl,mod.json,demo.xml,mod.xsl'.split(',');
 
           files.forEach((function(v){
