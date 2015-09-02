@@ -4,6 +4,7 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 var http=require('http');
 var querystring=require('querystring');
+
 var fs=require('fs');
 var Api={},
   ajax=function(path,param,cb){
@@ -40,12 +41,18 @@ var Api={},
 
 var getAPIs=function(cb){
     ajax(Api.allApi,function(chunk){
-      var data=JSON.parse(chunk);
-      cb(data);
+      try {
+        var data = JSON.parse(chunk);
+        cb(data);
+      }catch(e){
+        console.log('err',typeof cb)
+        cb({})
+      }
     });
 
 },
   checkName=function(v,cb){
+    return true;
 
     var files=fs.readdirSync('./mod');
 
@@ -58,6 +65,7 @@ var getAPIs=function(cb){
     ));
     //console.log('Sending register info...',param)
     ajax(Api.register,param,function(chunk){
+     // console.log('chuck',chunk)
       try {
         var data = JSON.parse(chunk);
       }catch(e){
@@ -70,39 +78,58 @@ var getAPIs=function(cb){
 
     //https://github.com/SBoudrias/Inquirer.js
     // Have Yeoman greet the user.
+    apis=(apis&&apis.length) ? apis:[];
     var done = this.async();
-    var prompts = [{
+    var prompts = [];
+
+    var dirname=process.cwd().split('/').pop();
+
+    prompts.push({
       type: 'input',
       name: 'modName',
-      message: '输入模块名:',
+      message: 'Input mod name(input nothing to use current dir):',
+      default:dirname,
       validate:function(v){
         var done2=this.async();
         if(/^[a-z][\-_a-z0-9]+$/.test(v)){
           /*
-
-          checkName(v,function(r){
-            done2(r.ok||'模块名冲突');
-          });
-          */
-          done2(checkName(v)||'模块名冲突');
+           checkName(v,function(r){
+           done2(r.ok||'模块名冲突');
+           });
+           */
+          done2(checkName(v)||'conflict mod name');
 
         }else{
-          done2( '模块名为小写字母、中划线、下划线和数字');
+          done2( 'mod name must in letter/-/_');
         }
 
       }
-    },{
-      type:'checkbox',
-      name:'deps',
-      message:'以下列出是已注册所有接口，共'+apis.length+'个，请在其中选择模块依赖的接口:',
-      choices:apis
+    })
 
-    }];
+   // console.log('cwd',process.cwd())
+
+    if(apis&&apis.length){
+      prompts.push({
+        type:'checkbox',
+        name:'deps',
+        message:'以下列出是已注册所有接口，共'+apis.length+'个，请在其中选择模块依赖的接口:',
+        choices:apis
+
+      })
+
+    }
+
 
     this.prompt(prompts, function (props) {
       this.modName=props.modName;
-      this.deps=props.deps;
-      this.depstr=JSON.stringify(props.deps);
+      this.isDefaultName=dirname==this.modName;
+     // this.modName=props.modName;
+      this.depstr='';
+      if(props.deps){
+        this.deps=props.deps;
+        this.depstr=JSON.stringify(props.deps);
+
+      }
 
       done();
     }.bind(this));
@@ -122,6 +149,7 @@ module.exports = yeoman.generators.Base.extend({
     console.log(
       'Getting data from remote ...'
     );
+   // console.log('prompting.bind(this)',prompting.bind(this).toString())
     getAPIs(prompting.bind(this));
 
   },
@@ -132,31 +160,32 @@ module.exports = yeoman.generators.Base.extend({
 
       registerMod({
         name:this.modName,
-        deps:this.deps.join(',')
+        deps:this.deps&&this.deps.join(',')
       },(function(r){
        // console.log('xmlNodes:',r)
         if(r.code==0||r.xmltpl||r.xml){
 
           this.log(chalk.green(
-            '模块 '+this.modName+' 注册成功!  开始生成脚手架文件...'
+            'mod '+this.modName+' get data ok!  creating files...'
           ));
           this.xmlNodes= r.xmltpl||r.xml;
-          var files='demo.xsl,mod.json,demo.xml,mod.xsl'.split(',');
+          var files='demo.xsl,mod.json,demo.xml,mod.xsl'.split(','),
+            prefix=this.isDefaultName?'./':('./'+this.modName)
 
           files.forEach((function(v){
 
-            this.template('_'+v,'mod/'+this.modName+'/'+v);
+            this.template('_'+v,prefix+'/'+v);
           }).bind(this));
 
-          var assetsfiles='index.js,index.less'.split(',');
+          var assetsfiles='index.js,index.css'.split(',');
 
           assetsfiles.forEach((function(v){
 
-            this.template('asset/_'+v,'mod/'+this.modName+'/asset/'+v);
+            this.template('asset/_'+v,prefix+'/asset/'+v);
           }).bind(this));
         }else{
           this.log(chalk.red(
-            '注册模块失败! '+r.msg
+            'remote serve response error! '+r.msg
           ));
         }
 

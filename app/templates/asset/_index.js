@@ -1,13 +1,3 @@
-KISSY.add(function(S){
+define([],function(){
 
-
-    return function(Mod){
-
-    }
-  },
-  {
-    requires:[
-
-
-    ]
-  });
+})
