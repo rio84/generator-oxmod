@@ -1,4 +1,4 @@
-# generator-rbpmod [![Build Status](https://secure.travis-ci.org/someuser/generator-rbpmod.png?branch=master)](https://travis-ci.org/someuser/generator-rbpmod)
+# generator-oxmod [![Build Status](https://secure.travis-ci.org/someuser/generator-oxmod.png?branch=master)](https://travis-ci.org/someuser/generator-oxmod)
 
 > [Yeoman](http://yeoman.io) generator
 
@@ -23,7 +23,7 @@ npm install -g yo
 
 Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
 
-To install generator-rbpmod from npm, run:
+To install generator-oxmod from npm, run:
 
 ```bash
 npm install -g generator-oxmod
