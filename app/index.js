@@ -82,7 +82,7 @@ var getAPIs=function(cb){
     var done = this.async();
     var prompts = [];
 
-    var dirname=process.cwd().split('/').pop();
+    var dirname=process.cwd().split(/\\|\//).pop();
 
     prompts.push({
       type: 'input',
