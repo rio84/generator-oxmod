@@ -5,7 +5,7 @@
     <domain>local</domain>
   </env>
   <data>
-    <%= xmlNodes %>
+    <%- xmlNodes %>
   </data>
 
 </root>
