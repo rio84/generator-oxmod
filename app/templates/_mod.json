@@ -1,6 +1,6 @@
 {
   "name": "<%=modName %>",
   "version": "1.0.0",
-  "apiDependencies": <%=depstr%>
+  "apiDependencies": <%-depstr%>
 }
 
