@@ -169,7 +169,7 @@ module.exports = yeoman.generators.Base.extend({
             'mod '+this.modName+' get data ok!  creating files...'
           ));
           this.xmlNodes= r.xmltpl||r.xml;
-          var files='demo.xsl,mod.json,demo.xml,mod.xsl'.split(','),
+          var files='demo.xsl,mod.json,demo.xml,mod.xsl,.gitignore'.split(','),
             prefix=this.isDefaultName?'./':('./'+this.modName)
 
           files.forEach((function(v){
