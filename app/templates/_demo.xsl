@@ -4,10 +4,11 @@
   <xsl:template match="/root">
     <html>
       <head>
-        <meta name="data-spm" content="181"/>
         <title><%=modName%> Demo</title>
+        <link rel="stylesheet" type="text/css" href="//openxsl.com/css/normalize.css" />
         <link rel="stylesheet" type="text/css" href="asset/index.css" />
-        <script src="http://openxsl.com/js/require.js"></script>
+
+        <script src="//openxsl.com/js/require.js"></script>
       </head>
       <body>
         <div class="layout">
