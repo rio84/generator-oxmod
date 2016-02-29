@@ -54,7 +54,7 @@ registerMod=function(param,cb){
     cb(data);
   });
 };
-registerMod({"name":"oxm-test2","deps":"place-hades,a1119,aba"},function(r){
+registerMod({"name":"oxm-test2","deps":"wxiconlist,aba"},function(r){
 
   console.log(r.xmltpl||r.xml)
 })
