@@ -1,6 +1,10 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:import href="mod.xsl" />
   <xsl:output method="html" doctype-public="" encoding="UTF-8"/>
+  <!--
+  created by: generator-oxmod@<%= generatorVersion %>
+  created time: <%= timeNow %>
+  -->
   <xsl:template match="/root">
     <html>
       <head>

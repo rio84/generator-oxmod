@@ -172,6 +172,9 @@ module.exports = yeoman.generators.Base.extend({
           var files='demo.xsl,mod.json,demo.xml,mod.xsl,.gitignore'.split(','),
             prefix=this.isDefaultName?'./':('./'+this.modName)
 
+          this.generatorVersion=this.pkg.version;
+          this.timeNow= (new Date).toLocaleString();
+
           files.forEach((function(v){
 
             this.template('_'+v,prefix+'/'+v);
