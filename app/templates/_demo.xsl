@@ -8,6 +8,7 @@
   <xsl:template match="/root">
     <html>
       <head>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
         <title><%=modName%> Demo</title>
         <link rel="stylesheet" type="text/css" href="//openxsl.com/css/normalize.css" />
         <link rel="stylesheet" type="text/css" href="asset/index.css" />
@@ -18,19 +19,18 @@
         <div class="layout">
           <xsl:call-template name="<%=modName%>" />
         </div>
-        <script>
+        <script><![CDATA[
           require.config({
           paths: {
           jquery: 'http://openxsl.com/js/jquery',
           mustache: 'http://openxsl.com/js/mustache'
           }
           });
-
           require(['jquery','asset/index'],function($,Mod){
-          Mod.init($('.J_OXMod'));
+          Mod && Mod.init && Mod.init($('.J_OXMod'));
 
           })
-        </script>
+        ]]></script>
       </body>
 
     </html>
