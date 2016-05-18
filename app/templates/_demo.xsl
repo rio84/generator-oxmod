@@ -22,11 +22,11 @@
         <script><![CDATA[
           require.config({
           paths: {
-          jquery: 'http://openxsl.com/js/jquery',
-          mustache: 'http://openxsl.com/js/mustache'
+          zepto: '//openxsl.com/js/zepto.min',
+          mustache: '//openxsl.com/js/mustache'
           }
           });
-          require(['jquery','asset/index'],function($,Mod){
+          require(['zepto','asset/index'],function(undefine,Mod){
           Mod && Mod.init && Mod.init($('.J_OXMod'));
 
           })
